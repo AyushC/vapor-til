@@ -36,7 +36,7 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     if let testPort = Environment.get("DATABASE_PORT") {
         databasePort = Int(testPort) ?? 5433
     } else {
-        databasePort = 5432
+        databasePort = 5433
     }
     
     let password = Environment.get("DATABASE_PASSWORD")
