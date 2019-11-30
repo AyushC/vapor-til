@@ -17,6 +17,7 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     var middlewares = MiddlewareConfig() // Create _empty_ middleware config
     middlewares.use(FileMiddleware.self) // Serves files from `Public/` directory
     middlewares.use(ErrorMiddleware.self) // Catches errors and converts to HTTP response
+    middlewares.use(SessionsMiddleware.self)
     services.register(middlewares)
 
     try services.register(LeafProvider())
@@ -73,4 +74,5 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     commandConfig.useFluentCommands()
     services.register(commandConfig)
     config.prefer(LeafRenderer.self, for: ViewRenderer.self)
+    config.prefer(MemoryKeyedCache.self, for: KeyedCache.self)
 }
